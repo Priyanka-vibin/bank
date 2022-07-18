@@ -45,24 +45,47 @@ pswdChange(event:any){
   
 }
   
- login() {
-    var acno = this.acno
-    var pswd = this.pswd
+//  login() {
+//     var acno = this.acno
+//     var pswd = this.pswd
 
-      let  userDetails = this.userDetails
+//       let  userDetails = this.userDetails
 
-     if(acno in userDetails){
-       if(pswd == userDetails[acno]['password']){
-        alert('Login sucessful')
-          }
-          else{
-            alert('Incorrect Password')
-          }
+//      if(acno in userDetails){
+//        if(pswd == userDetails[acno]['password']){
+//         alert('Login sucessful')
+//           }
+//           else{
+//             alert('Incorrect Password')
+//           }
+//       }
+//      else{
+//        alert('User doesnot exist')
+//       }
+//     }
+
+
+//login with -2 arg -template reference
+
+    login(a:any,p:any) {
+
+      var acno = a.value
+      var pswd = p.value
+  
+        let  userDetails = this.userDetails
+  
+       if(acno in userDetails){
+         if(pswd == userDetails[acno]['password']){
+          alert('Login sucessful')
+            }
+            else{
+              alert('Incorrect Password')
+            }
+        }
+       else{
+         alert('User doesnot exist')
+        }
       }
-     else{
-       alert('User doesnot exist')
-      }
-    }
   }
 
   
