@@ -15,20 +15,26 @@
                   
               </div>
               <div class="card-body">
-                  <form (ngSubmit)="login()">
+                  <form [formGroup]="loginForm"  (ngSubmit)="login()">
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-user"></i></span>
                           </div>
-                          <input [(ngModel)]="acno" name="acno" type="text" class="form-control" [placeholder]="account" id="login_accno" required>
+                          <input formControlName="acno" name="acno" type="text" class="form-control" [placeholder]="account" id="login_accno" required>
                           
                       </div>
+
+                      <div *ngIf="this.loginForm.get('acno')?.touched&&this.loginForm.get('acno')?.errors" style="color:yellow ;">Invalid Account Number
+                    </div>
+
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                           </div>
-                          <input [(ngModel)]="pswd" name="pswd" type="password" class="form-control" placeholder="password" id="login_password" required>
+                          <input formControlName="pswd" name="pswd" type="password" class="form-control" placeholder="password" id="login_password" required>
                       </div>
+                      <div *ngIf="this.loginForm.get('pswd')?.touched&&this.loginForm.get('pswd')?.errors" style="color:yellow ;">Invalid Password
+                    </div>
                       
                       <div class="form-group">
                           <input type="submit" value="Login" class="btn float-right login_btn " style="width:50%" >

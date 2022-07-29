@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
 // import { Action } from 'rxjs/internal/scheduler/Action';
@@ -16,12 +17,19 @@ export class LoginComponent implements OnInit {
   
   acno=''
   pswd=''
+
+
+//login model
+  loginForm = this.fb.group({
+    acno:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]]
+})
   //data base - bank
 
  
   // constructor
 
-  constructor(private router:Router,private ds:DataService) { }
+  constructor(private fb:FormBuilder,private router:Router,private ds:DataService) { }
 
   // ngOnInit -Life Cycle Hook of angular
   ngOnInit(): void {
@@ -44,17 +52,35 @@ export class LoginComponent implements OnInit {
 // }
   
  login() {
-    var acno = this.acno
-    var pswd = this.pswd
 
+  var acno=this.loginForm.value.acno
+  var pswd=this.loginForm.value.pswd
+
+ 
+  if(this.loginForm.valid){
     const result = this.ds.login(acno,pswd)
    if(result){
     alert('Login sucessfull')
     this.router.navigateByUrl('dashboard')
    }
+  }
+   else{
+    alert('Invalid Form')
      
     }
-  }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 //login with -2 arg -template reference
