@@ -8,7 +8,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 })
 export class DataService {
 
-cuurentUser:any
+currentUser:any
 
 currentAcno:any
 
@@ -32,8 +32,8 @@ currentAcno:any
 
       localStorage.setItem('currentAcno',JSON.stringify(this.currentAcno))
     }
-    if(this.cuurentUser){
-      localStorage.setItem('cuurentUser',JSON.stringify(this.cuurentUser))
+    if(this.currentUser){
+      localStorage.setItem('currentUser',JSON.stringify(this.currentUser))
   }
 }
 
@@ -46,8 +46,8 @@ getDetails(){
  if(localStorage.getItem('currentAcno')){
   this.currentAcno = JSON.parse(localStorage.getItem('currentAcno') || '')
  }
- if(localStorage.getItem('cuurentUser')){
-  this.cuurentUser = JSON.parse(localStorage.getItem('cuurentUser') || '')
+ if(localStorage.getItem('currentUser')){
+  this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '')
  }
 
 }
@@ -66,7 +66,7 @@ getDetails(){
         acno,
         username,
         password,
-        balane: 0,
+        balance: 0,
         transaction: []
 
       }
@@ -82,7 +82,7 @@ getDetails(){
     let userDetails = this.userDetails
     if (acno in userDetails) {
       if (pswd == userDetails[acno]['password']) {
-        this.cuurentUser = userDetails[acno]['username']
+        this.currentUser = userDetails[acno]['username']
         this.currentAcno = acno
         this.saveDetails()
         return true
@@ -102,14 +102,14 @@ getDetails(){
 
   //deposit
 
-  deposit(acno:any, pswd: any, amount: any) {
+  deposit(acno:any, pswd: any, amt: any) {
     let userDetails = this.userDetails
     console.log(userDetails)
-    var amount1 = parseInt(amount)
+    var amount = parseInt(amt)
 
     if (acno in userDetails) {
       if (pswd==userDetails[acno]['password']) {
-        userDetails[acno]['balance']+=amount1
+        userDetails[acno]['balance']+=amount
         userDetails[acno]['transaction'].push({
           type: 'CREDIT',
           amount
@@ -130,19 +130,17 @@ getDetails(){
   }
 
 
-
-
   //withdraw
 
-  withdraw(acno: any, pswd: any, amount: any) {
+  withdraw(acno: any, pswd: any, amt: any) {
     let userDetails = this.userDetails
-    var amt = parseInt(amount)
+    var amount = parseInt(amt)
 
     if (acno in userDetails) {
       if (pswd == userDetails[acno]['password']) {
 
-        if (userDetails[acno]['balance'] > amt) {
-          userDetails[acno]['balance'] -= amt
+        if (userDetails[acno]['balance'] > amount) {
+          userDetails[acno]['balance'] -= amount
           userDetails[acno]['transaction'].push({
             type: 'DEBIT',
             amount

@@ -10,9 +10,10 @@
 </h3>
 
 <a routerLink="/transaction">Transaction History</a>
+<h4 style="color: white ;">System date and time : {{sDetails | date : 'short' }}</h4>
 
 <!-- child ----delete confirm -->
-<app-deleteconfirm [item]="acno"></app-deleteconfirm>
+<app-deleteconfirm (onCancel)="oncancel()" [item]="acno"></app-deleteconfirm>
 
 <div [ngClass]="acno?'style1':'' " class="container col-md-12 mt-0">
     <div class="d-flex justify-content-center h-95 mt-3">
@@ -28,6 +29,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
+                        
                         <input formControlName="acno" name="acno" type="text" class="form-control"
                             placeholder="Account number" id="login_accno" required>
                     </div>

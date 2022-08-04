@@ -31,10 +31,12 @@ export class DashboardComponent implements OnInit {
 
   //share to child
   acno: any
+  sDetails:any
 
 
   constructor(private router: Router, private fb: FormBuilder, private ds: DataService) {
-    this.user = this.ds.cuurentUser
+    this.user = this.ds.currentUser
+    this.sDetails= new Date()
   }
 
 
@@ -51,9 +53,7 @@ export class DashboardComponent implements OnInit {
     var pswd = this.depositForm.value.pswd
     var amount = this.depositForm.value.amount
 
-
-
-
+     
     if (this.depositForm.valid) {
       const result = this.ds.deposit(acno, pswd, amount)
 
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
   logout() {
     //remove login acno and username
     localStorage.removeItem('currentAcno')
-    localStorage.removeItem('cuurentUser')
+    localStorage.removeItem('currentUser')
     //navigate to login page
     this.router.navigateByUrl('')
   }
@@ -101,6 +101,9 @@ export class DashboardComponent implements OnInit {
   //deleteParent()
   deleleteParent() {
     this.acno = JSON.parse(localStorage.getItem('currentAcno') || '')
+  }
+  oncancel(){
+    this.acno=""
   }
 
 } 
